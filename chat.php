@@ -10,6 +10,7 @@
             }
             #main {
                 position: absolute;
+                overflow: hidden;
                 height: 100%;
                 width: 100%;
                 margin: 0px;
@@ -19,12 +20,19 @@
                 z-index: 1;
             }
             #msg_list{
-                height: 100%;
+                position: relative;
+                overflow:auto;
+                height: 85%;
                 width: 100%;
+                left: 0px;
+                top: 0px;
                 background-color: #AFAFAF;
             }
             #msg_input{
-                height: 100%;
+                position: relative;
+                left: 0px;
+                top: 0px;
+                height: 15%;
                 width: 100%;
             }
         </style>
@@ -33,7 +41,7 @@
             var msg_id = 0;
             function upmsg(data, status) {
                 if (data.newmsg > 0) {
-                    $("#msg_list").append(data.msg);
+                    $("#msg_list").append(data.msg).scrollTop($("#msg_list")[0].scrollHeight-$("#msg_list").height());
                     msg_id = data.msg_id;
                 }
                 $("#sss").change();
@@ -63,14 +71,9 @@
 
     <body>
         <div id="sss" style="display:none"></div>
-        <div id="main"><table style="height: 100%;width: 100%;margin: 0px;padding: 0px;" border="1" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td><div id="msg_list"></div></td>
-                </tr>
-                <tr>
-                    <td height="90px"><textarea id="msg_input">输入聊天内容</textarea>&nbsp;</td>
-                </tr>
-            </table>
-        </div>
+        <div id="main">
+            <div id="msg_list"></div>
+            <textarea id="msg_input">输入聊天内容</textarea>
+            </div>
     </body>
 </html>
